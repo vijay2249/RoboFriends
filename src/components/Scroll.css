@@ -1,3 +1,7 @@
-span , div{
-	overflow-y: hidden;
+::-webkit-scrollbar {
+	width: 0;
+}
+
+span{
+	height: calc(10vh-70px);
 }
