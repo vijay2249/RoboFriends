@@ -1,46 +1,53 @@
-import React, { Component } from 'react';
+import React, { Component, setState, useEffect, useState } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import './App.css';
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      robots: [],
-      searchfield: ''
-    }
-  }
+const App = () =>{
+  const [humanoids, setHumanoids] = useState([])
+  const [searchfield, setSearchField] = useState('')
+  // const [objects, setObjects] = useState({
+  //   humanoids : [],
+  //   searchfield : ''
+  // })
 
-  componentDidMount() {
+  useEffect(()=>{
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response=> response.json())
-      .then(users => {this.setState({ robots: users})});
-  }
+      .then(response => response.json())
+      .then(users => setHumanoids(users))
+      // .then(users => {
+        // humanoids = objects.humanoids
+        // setObjects({...objects, [humanoids]:users}))
+      // }
+  },[])
 
-  onSearchChange = (event) => {
-    this.setState({ searchfield: event.target.value })
-  }
+  const onSearchChange = (event) => setSearchField(event.target.value)
+  // const onSearchChange = (event) => {
+    // searchfiled = objects.searchfield
+    // setObjects({...objects, [searchfiled]: event.target.value})
+  // }
 
-  render() {
-    const { robots, searchfield } = this.state;
-    const filteredRobots = robots.filter(robot =>{
-      return robot.name.toLowerCase().includes(searchfield.toLowerCase());
-    })
-    if(robots.length === 0) return <h1>Loading</h1>;
-    else{
-      return(
+  const filteredHumanoids = humanoids.filter(humanoid =>{
+    return humanoid.name.toLowerCase().includes(searchfield.toLocaleLowerCase());
+  })
+  // const filteredHumanoids = objects.humanoids.filter(humanoid =>{
+    // return humanoid.name.toLocaleLowerCase().includes(objects.searchfield.toLocaleLowerCase())
+  // })
+
+  return(
+    !humanoids.length
+      ? <h1>Loading</h1>
+      : (
         <div className='tc'>
-          <h1 height='10px'>RoboFriends</h1>
-          <SearchBox height='20px' searchChange={this.onSearchChange}/>
-          <Scroll>
-            <CardList robots={filteredRobots} />
-          </Scroll>
-        </div>
-      );
-    }
-  }
+        <h1 height='10px'>Humanoids</h1>
+        <SearchBox height='20px' searchChange={onSearchChange}/>
+        <Scroll>
+          <CardList robots={filteredHumanoids} />
+        </Scroll>
+      </div>
+      )
+  )
 }
 
 export default App;
