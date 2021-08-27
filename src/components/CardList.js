@@ -1,7 +1,15 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = ({ robots }) => {
+const CardList = ({ robots, input }) => {
+  if(!robots.length){
+    let robot = {
+      "id": input.length,
+      "name": input,
+      "email": `${input}@robot.robots.in`
+    }
+    robots.push(robot);
+  }
   return (
     <div>
       {

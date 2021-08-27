@@ -33,9 +33,9 @@ class App extends Component {
       return(
         <div className='tc'>
           <h1 height='10px'>RoboFriends</h1>
-          <SearchBox height='20px' searchChange={this.onSearchChange}/>
+          <SearchBox height='20px' searchChange={this.onSearchChange} cardsCount={filteredRobots.length}/>
           <Scroll>
-            <CardList robots={filteredRobots} />
+            <CardList robots={filteredRobots} input={searchfield }/>
           </Scroll>
         </div>
       );

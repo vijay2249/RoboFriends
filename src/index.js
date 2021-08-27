@@ -2,6 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
-import 'tachyons'; 
+import 'tachyons';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import { searchRobots } from './reducers';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(searchRobots)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+, document.getElementById('root'));
