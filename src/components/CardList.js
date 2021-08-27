@@ -10,7 +10,6 @@ const CardList = ({ humanoids, input }) => {
     }
     humanoids.push(human)
   }
-  console.log(humanoids)
   return (
     <div>
       {
