@@ -1,17 +1,26 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = ({ robots }) => {
+const CardList = ({ humanoids, input }) => {
+  if(!humanoids.length){
+    let human = {
+      'id': input.length,
+      'name': input,
+      "email": `${input}@humanoid.human`
+    }
+    humanoids.push(human)
+  }
+  console.log(humanoids)
   return (
     <div>
       {
-        robots.map((user, i) => {
+        humanoids.map((user, i) => {
           return (
             <Card
               key={i}
-              id={robots[i].id}
-              name={robots[i].name}
-              email={robots[i].email}
+              id={humanoids[i].id}
+              name={humanoids[i].name}
+              email={humanoids[i].email}
               />
           );
         })

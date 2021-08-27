@@ -1,4 +1,4 @@
-import React, { Component, setState, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
@@ -16,10 +16,10 @@ const App = () =>{
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(users => setHumanoids(users))
-      // .then(users => {
-        // humanoids = objects.humanoids
-        // setObjects({...objects, [humanoids]:users}))
-      // }
+      // .then(users =>{
+        // let humans = objects.humanoids
+        // setObjects({...objects, humans: users})
+      // })
   },[])
 
   const onSearchChange = (event) => setSearchField(event.target.value)
@@ -31,7 +31,7 @@ const App = () =>{
   const filteredHumanoids = humanoids.filter(humanoid =>{
     return humanoid.name.toLowerCase().includes(searchfield.toLocaleLowerCase());
   })
-  // const filteredHumanoids = objects.humanoids.filter(humanoid =>{
+  // const filteredHumanoids = (objects.humanoids).filter(humanoid =>{
     // return humanoid.name.toLocaleLowerCase().includes(objects.searchfield.toLocaleLowerCase())
   // })
 
@@ -41,9 +41,9 @@ const App = () =>{
       : (
         <div className='tc'>
         <h1 height='10px'>Humanoids</h1>
-        <SearchBox height='20px' searchChange={onSearchChange}/>
+        <SearchBox height='20px' searchChange={onSearchChange} cardsCount={filteredHumanoids.length}/>
         <Scroll>
-          <CardList robots={filteredHumanoids} />
+            <CardList humanoids={filteredHumanoids} input={searchfield} />
         </Scroll>
       </div>
       )
