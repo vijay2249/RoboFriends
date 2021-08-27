@@ -1,13 +1,13 @@
 import { CHANGE_SEARCH_FIELD } from "./constants";
 
 const initialState = {
-  searchfield: ''
+  searchField: ''
 }
 
 export const searchRobots = (state=initialState, action={}) =>{
   switch(action.type){
     case CHANGE_SEARCH_FIELD:
-      return {...state, searchfield: action.payload}
+      return {...state, searchField: action.payload}
       // another way of doing this return statement is
       // return Object.assign({}, state, searchfield:action.payload)
     default:
